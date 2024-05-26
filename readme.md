@@ -14,6 +14,15 @@ git clone URL_OF_THIS_REPO
 
 You are free to use all the code yourself.
 
+Initially run
+```bash
+npm install
+```
+or
+```bash
+npm i
+```
+
 ## Tests
 
 Uses Jest library to run tests.
