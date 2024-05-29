@@ -24,7 +24,7 @@ function weightCheckMiddleware(req, res, next) {
 function ageCheckMiddleware(req, res, next) {
   const age = req.query.age;
 
-  if(age >= 5 && age <= 20){
+  if (age >= 5 && age <= 20) {
     next();
   } else {
     res.send("Age criteria not satisfied !!");
@@ -44,15 +44,20 @@ app.get("/carousel", ageCheckMiddleware, function (req, res) {
 });
 
 // here two middlewares needed first the control come from the ticketcheck to the weightcheck through next() will go to agecheck and then the last function
-app.get("/ferris-wheel", weightCheckMiddleware, ageCheckMiddleware, function (req, res) {
-  // if control reaches here means all the condition specified in the middlewares are successfully satisfied
-  res.status(200).send("Ride completed !!");
-});
+app.get(
+  "/ferris-wheel",
+  weightCheckMiddleware,
+  ageCheckMiddleware,
+  function (req, res) {
+    // if control reaches here means all the condition specified in the middlewares are successfully satisfied
+    res.status(200).send("Ride completed !!");
+  }
+);
 
 app.listen(3000);
 
 // below app.use is the error or exception handling function which will be executed if any exception or error comes on the server side
-app.use(function (err, req, res, next){
-    console.log(err); // log the error but don't get it visible to the user
-    res.send("Something went wrong !!");
+app.use(function (err, req, res, next) {
+  console.log(err); // log the error but don't get it visible to the user
+  res.send("Something went wrong !!");
 });
