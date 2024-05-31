@@ -18,13 +18,11 @@ function signJwt(username, password) {
   const passwordSchema = zod.string().min(6);
 
   let response = usernameSchema.safeParse(username);
-
   if (!response.success) {
     return null;
   }
 
   response = passwordSchema.safeParse(password);
-
   if (!response.success) {
     return null;
   }
@@ -58,8 +56,8 @@ function verifyJwt(token) {
  *                         Returns false if the token is not a valid JWT format.
  */
 function decodeJwt(token) {
-  const decodedToken = jwt.decode(token);
-  console.log(decodedToken);
+  const decodedToken = jwt.decode(token); // decoding doesn't requires password or the secret key
+  // console.log(decodedToken);
 
   if (decodedToken) {
     return true;

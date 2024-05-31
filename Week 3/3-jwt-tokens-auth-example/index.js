@@ -1,3 +1,10 @@
+/* 
+  At high level there are 3 main functions of jwt:
+  sign(json data, password)
+  verify(json data, password)
+  decode(jwt token)
+*/
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const jwtPassword = "123456";

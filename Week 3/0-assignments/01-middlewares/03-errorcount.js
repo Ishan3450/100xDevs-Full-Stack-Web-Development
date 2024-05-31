@@ -23,6 +23,7 @@ app.get("/errorCount", function (req, res) {
   res.status(200).json({ errorCount });
 });
 
+// Error-handling middleware
 app.use(function (err, req, res, next) {
   errorCount++;
   res.status(404).json({"message": "Something went wrong on our side"});
