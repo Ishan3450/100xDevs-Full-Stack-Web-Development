@@ -70,7 +70,7 @@ userRouter.post("/signup", async function (req, res) {
   // creating account with some initial amount for the new user
   await Account.create({
     userId,
-    balance: 10000
+    balance: 10000,
   });
 
   res.status(200).json({
@@ -108,7 +108,7 @@ userRouter.post("/signin", async function (req, res) {
 
   if (!isUserFound) {
     res.status(411).json({
-      message: "Error while logging in",
+      message: "User not found",
     });
     return;
   }
@@ -121,7 +121,7 @@ userRouter.post("/signin", async function (req, res) {
 
   if (!isPasswordCorrect) {
     res.status(411).json({
-      message: "Error while logging in",
+      message: "Incorrect password",
     });
     return;
   }
@@ -201,12 +201,14 @@ userRouter.get("/bulk", authMiddleware, async function (req, res) {
   });
 
   res.status(200).json({
-    users: users.map((user) => ({
-      _id: user._id,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-    })),
+    users: users
+      .filter((user) => user._id.toString() !== req.userId)
+      .map((user) => ({
+        _id: user._id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      })),
   });
 });
 
