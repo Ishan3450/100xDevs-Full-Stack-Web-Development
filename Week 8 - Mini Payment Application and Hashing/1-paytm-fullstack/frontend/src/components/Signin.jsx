@@ -42,6 +42,7 @@ function Signin() {
           });
 
           localStorage.setItem("authToken", response.data.token);
+          localStorage.setItem("username", response.data.username);
           navigate("/dashboard");
         }}/>
 

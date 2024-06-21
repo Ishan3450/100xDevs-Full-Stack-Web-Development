@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const zod = require("zod");
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, Account } = require("../db/db");
@@ -136,6 +135,7 @@ userRouter.post("/signin", async function (req, res) {
 
   res.status(200).json({
     token: `Bearer ${jwtToken}`,
+    username: isUserFound.firstName,
   });
 });
 

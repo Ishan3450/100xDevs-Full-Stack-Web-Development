@@ -19,7 +19,7 @@ function Dashboard() {
 
   return (
     <>
-      <AppBar username={"Ishan"} />
+      <AppBar username={localStorage.getItem("username")} />
       <div className="w-[95%] m-auto">
         <Balance balance={balance} />
         <Users />

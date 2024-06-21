@@ -60,6 +60,7 @@ function Signup() {
           });
           
           localStorage.setItem("authToken", response.data.token);
+          localStorage.setItem("username", firstName);
           navigate("/dashboard");
         }} />
 
