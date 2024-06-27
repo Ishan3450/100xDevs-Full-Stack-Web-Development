@@ -32,37 +32,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const pg_1 = require("pg");
+const client_1 = require("@prisma/client");
 const dotenv = __importStar(require("dotenv"));
-const console_1 = require("console");
 dotenv.config();
-const client = new pg_1.Client({
-    connectionString: process.env.DB_CONNECTION_URL
-});
-function createUserTable() {
+const prisma = new client_1.PrismaClient();
+function insertUser(email, firstName, lastName, password) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield client.connect();
-            const result = yield client.query(`
-            CREATE TABLE users (
-                id SERIAL PRIMARY KEY,
-                username VARCHAR(50) UNIQUE NOT NULL,
-                email VARCHAR(255) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-            );
-        `);
-            // const result = await client.query(`
-            //     DROP TABLE users
-            // `);
-            (0, console_1.log)(result);
-        }
-        catch (error) {
-            (0, console_1.log)(`error: ${error}`);
-        }
-        finally {
-            yield client.end();
-        }
+        const response = yield prisma.user.create({
+            data: {
+                email,
+                firstName,
+                lastName,
+                password
+            }
+        });
+        console.log(response);
     });
 }
-createUserTable();
+insertUser("johndoe@gmail.com", "John", "Doe", "JohnDoe");

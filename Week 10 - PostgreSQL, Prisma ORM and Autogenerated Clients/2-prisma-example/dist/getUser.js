@@ -32,37 +32,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const pg_1 = require("pg");
+const client_1 = require("@prisma/client");
 const dotenv = __importStar(require("dotenv"));
-const console_1 = require("console");
 dotenv.config();
-const client = new pg_1.Client({
-    connectionString: process.env.DB_CONNECTION_URL
-});
-function createUserTable() {
+const prisma = new client_1.PrismaClient();
+function getUser(email) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield client.connect();
-            const result = yield client.query(`
-            CREATE TABLE addresses (
-                id SERIAL PRIMARY KEY,
-                user_id INTEGER NOT NULL,
-                city VARCHAR(100) NOT NULL,
-                country VARCHAR(100) NOT NULL,
-                street VARCHAR(255) NOT NULL,
-                pincode VARCHAR(20),
-                created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-            );
-        `);
-            (0, console_1.log)(result);
-        }
-        catch (error) {
-            (0, console_1.log)(`error: ${error}`);
-        }
-        finally {
-            yield client.end();
-        }
+        const user = yield prisma.user.findFirst({
+            where: { email }
+        });
+        console.log(user);
     });
 }
-createUserTable();
+getUser("johndoe@gmail.com");
+getUser("testupdated@gmail.com");

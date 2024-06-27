@@ -32,34 +32,63 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const pg_1 = require("pg");
+const client_1 = require("@prisma/client");
 const dotenv = __importStar(require("dotenv"));
-const console_1 = require("console");
 dotenv.config();
-const client = new pg_1.Client({
-    connectionString: process.env.DB_CONNECTION_URL
-});
-function getUsers() {
+const prisma = new client_1.PrismaClient();
+function updateEmail(email, newEmail) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield client.connect();
-            const selectQuery = "SELECT * FROM users WHERE email=$1";
-            const result = yield client.query(`
-            SELECT * FROM users JOIN addresses ON users.id = addresses.id WHERE users.id = 1
-        `);
-            if (result.rows.length > 0) {
-                (0, console_1.log)(`Users found: `, result.rows[0]);
+        const response = yield prisma.user.update({
+            where: {
+                email
+            },
+            data: {
+                email: newEmail
             }
-            else {
-                (0, console_1.log)("No users found");
-            }
-        }
-        catch (error) {
-            (0, console_1.log)("error " + error);
-        }
-        finally {
-            yield client.end();
-        }
+        });
+        console.log(response);
     });
 }
-getUsers();
+function updateFirstname(email, updatedFirstname) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield prisma.user.update({
+            where: {
+                email
+            },
+            data: {
+                firstName: updatedFirstname
+            }
+        });
+        console.log(response);
+    });
+}
+function updateLastName(email, updatedLastname) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield prisma.user.update({
+            where: {
+                email
+            },
+            data: {
+                lastName: updatedLastname
+            }
+        });
+        console.log(response);
+    });
+}
+function changePassowrd(email, newPassword) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield prisma.user.update({
+            where: {
+                email
+            },
+            data: {
+                password: newPassword
+            }
+        });
+        console.log(response);
+    });
+}
+// updateEmail("test@gmail.com", "testupdated@gmail.com");
+// updateFirstname("testupdated@gmail.com", "John Updated");
+// updateLastName("testupdated@gmail.com", "Doe Updated");
+// changePassowrd("testupdated@gmail.com", "Password updated");
