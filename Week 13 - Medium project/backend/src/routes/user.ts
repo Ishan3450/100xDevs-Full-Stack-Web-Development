@@ -1,20 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 import { Router } from "express";
-import { z } from "zod";
 import jwt from "jsonwebtoken";
 import * as env from "dotenv";
+import { userZodObject } from '@ishan321/common';
 
 env.config();
 
 const userRouter = Router();
 const prisma = new PrismaClient();
 const jwtSecretKey = process.env.JWT_SECRET_KEY!;
-
-const userZodObject = z.object({
-    email: z.string().email(),
-    password: z.string().min(6),
-    name: z.string().optional(),
-});
 
 userRouter.post("/signup", async (req, res) => {
     const email: string = req.body.email;

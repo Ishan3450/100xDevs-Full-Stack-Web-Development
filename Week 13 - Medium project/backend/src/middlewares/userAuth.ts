@@ -1,9 +1,18 @@
-import jwt from 'jsonwebtoken';
+import jwt, { decode, JwtHeader } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from "express";
 
 const secretPassword: string = process.env.JWT_SECRET_KEY!;
 
-async function userAuth(req: Request, res: Response, next: NextFunction){
+interface CustomRequest extends Request {
+    userId?: string; // Add a userId property to the Request interface
+}
+
+interface JwtPayload{
+    id: string,
+    email: string
+}
+
+async function userAuth(req: CustomRequest, res: Response, next: NextFunction){
     const authToken = req.header('authorization');
 
     if(!authToken){
@@ -17,7 +26,8 @@ async function userAuth(req: Request, res: Response, next: NextFunction){
         const splitted: string[] = authToken!.split(' ');
         const mainToken = splitted[1];
 
-        jwt.verify(mainToken, secretPassword);
+        const decoded = jwt.verify(mainToken, secretPassword) as JwtPayload;
+        req.userId = decoded.id;
         next();
     } catch (error) {
         res.status(411).json({
