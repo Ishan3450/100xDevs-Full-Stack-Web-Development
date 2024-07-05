@@ -60,6 +60,7 @@ userRouter.post("/signin", async (req, res) => {
         res.status(411).json({
             "error": "Wrong inputs provided"
         })
+        return;
     }
 
     try {
@@ -73,6 +74,7 @@ userRouter.post("/signin", async (req, res) => {
             res.status(411).json({
                 "error": "Invalid username or password"
             })    
+            return;
         }
 
         const jwtToken = jwt.sign( {
