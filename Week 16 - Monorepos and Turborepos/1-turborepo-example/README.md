@@ -10,6 +10,16 @@ Run the following command:
 npx create-turbo@latest
 ```
 
+<!-- to start locally -->
+```sh
+npm run dev
+```
+
+<!-- generates a new component with automatic generator with the help of turbo generators -->
+```sh
+npm run generate:component
+```
+
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
