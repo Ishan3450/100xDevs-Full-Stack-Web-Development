@@ -1,3 +1,12 @@
+# Tech Stack used to build this project
+
+```
+Turborepo
+Next.js
+Tailwind
+
+```
+
 # Turborepo starter
 
 This is an official starter Turborepo.
