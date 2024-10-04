@@ -5,7 +5,11 @@ interface User {
     gender?: string // * optional field
 }
 
-function isLegal(user: User): boolean{
+// kind of inheritence
+interface Admin extends User { }
+interface Admin2 extends Admin, User { }
+
+function isLegal(user: User): boolean {
     return user.age >= 18;
 }
 

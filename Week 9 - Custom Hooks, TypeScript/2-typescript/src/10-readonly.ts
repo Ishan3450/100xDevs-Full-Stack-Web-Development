@@ -11,7 +11,7 @@ const user: UserEnt = {
 // user.name = "another test" // this should give error as UserEnt.name is readonly property
 
 /* 
-    ANOTHER WAY
+    ANOTHER WAY: Declaring whole entity as read only
 */
 
 interface UserEnt2 {

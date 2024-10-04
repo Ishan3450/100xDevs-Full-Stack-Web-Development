@@ -21,7 +21,7 @@ function validateObject(obj){
     console.log(response);
 }
 
-// validateObject({}) // output: { success: false, error: [Getter] }
+validateObject({}) // output: { success: false, error: [Getter] }
 validateObject({
     email: "test@gmail.com",
     password: "12312312313",

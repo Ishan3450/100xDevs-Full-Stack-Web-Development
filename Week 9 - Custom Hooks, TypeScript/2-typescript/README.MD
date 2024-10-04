@@ -11,10 +11,13 @@ npm init -y
 tsc --init
 ```
 
-## Step 3 - Create a .ts file
+## Step 3 - Create a .ts file and also configure tsconfig.json file
 
 ## Step 4 - Transpile the .ts into .js file
 
 ```
 tsc -b
+or
+tsc -w 
+<!-- -w is for watch mode will constantly monitor the file for changes -->
 ```

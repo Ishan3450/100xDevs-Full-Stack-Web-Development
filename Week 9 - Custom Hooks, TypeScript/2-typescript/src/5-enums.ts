@@ -1,11 +1,14 @@
-enum Direction{
+const enum Direction{
     Up,  // 0
     Down, // 1
     Left, // 2
     Right // 3
 }
 
-enum DirectionInWords{
+
+// * Here put const before enum keyword and the amount of js code being generated will drastically reduced just check it
+
+const enum DirectionInWords{
     Up = "up", 
     Down = "down",
     Left = "left",
