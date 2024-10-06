@@ -38,9 +38,10 @@ export function Signup() {
                 type="button"
                 className="mt-8 w-full text-white bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
                 onClick={async () => {
-                    axios.post("http://localhost:3000/api/user", {
-                      username, password
-                    });
+                  axios.post("http://localhost:3000/api/user", {
+                    username,
+                    password,
+                  });
                 }}
               >
                 Sign in
@@ -53,12 +54,7 @@ export function Signup() {
   );
 }
 
-function LabelledInput({
-  label,
-  placeholder,
-  type,
-  onChange,
-}: LabelledInputType) {
+function LabelledInput({ label, placeholder, type, onChange }: LabelledInputType) {
   return (
     <div>
       <label className="block mb-2 text-sm text-black font-semibold pt-4">

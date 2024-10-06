@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  // id          Int      @id @default(autoincrement())
+  // or
+  id             String          @id @default(uuid())
+  name           String?
+  email          String          @unique
+  age            Int
+  // isAdmin        Boolean
+  // largeNum       BigInt
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  // blob           Bytes
+  posts          Post[]          @relation("postedPosts") // just labeled the relation just to remove ambiguity here it doest have to do anyting in the db just labelling that's it
+  favouritePosts Post[]          @relation("favouritedPosts") // User and Post is one to many relationship
+  userPreference UserPreference? // User and UserPreference is one to one relationship
+  role Role @default(USER)
+
+  // block level attributes
+  @@unique([name, age]) // we don't want 2 users having same name and same age, can have same age and different name or vice-versa
+  @@index([email]) // indexing
+}
+
+model UserPreference {
+  id          String @id @default(uuid())
+  preferences Json?
+  user        User   @relation(fields: [userId], references: [id])
+  userId      String @unique
+}
+
+model Post {
+  id            String     @id @default(uuid())
+  title         String
+  author        User       @relation("postedPosts", fields: [authorId], references: [id])
+  authorId      String
+  favouriteBy   User?      @relation("favouritedPosts", fields: [favouriteById], references: [id])
+  favouriteById String?
+  categories    Category[] // Post and Category is many to many relationship
+}
+
+model Category {
+  id    String @id @default(uuid())
+  name  String
+  posts Post[]
+}
+
+// set of fixed values to choose from
+enum Role {
+  USER
+  ADMIN
+}
