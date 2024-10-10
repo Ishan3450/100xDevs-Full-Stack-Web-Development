@@ -2,7 +2,6 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import path from "path";
 
 const app = express();
 

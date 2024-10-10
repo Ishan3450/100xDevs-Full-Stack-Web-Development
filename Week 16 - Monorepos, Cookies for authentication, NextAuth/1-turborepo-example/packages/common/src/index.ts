@@ -1,1 +1,1 @@
-export const NAME = "Test for backend";
+export const NAME = "This is a common message.";

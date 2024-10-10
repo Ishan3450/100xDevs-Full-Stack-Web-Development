@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import client from "@/db" // singleton class client import
 
 export function GET() {
-    return Response.json({
+    return NextResponse.json({
         name: "user",
         email: "user@gmail.com"
     });

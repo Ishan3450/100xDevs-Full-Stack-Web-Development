@@ -8,9 +8,7 @@
   "exports": {
     "./config": "./src/index.ts"
   },
-  "dependencies": {
-    "@repo/common": "*"
-  },
+  "dependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC",

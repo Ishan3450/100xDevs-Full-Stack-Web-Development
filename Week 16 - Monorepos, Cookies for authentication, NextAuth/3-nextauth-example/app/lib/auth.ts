@@ -21,7 +21,7 @@ export const NEXT_AUTH_CONFIG = {
             }
         })
     ],
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET, // for signing jwt tokens
     callbacks: {
         jwt: ({token, user}: any) => {
             // console.log(token);
