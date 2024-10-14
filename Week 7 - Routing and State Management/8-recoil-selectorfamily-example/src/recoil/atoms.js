@@ -5,7 +5,7 @@ export const todosSelectorFamily = atomFamily({
   key: "todosSelectorFamily",
   default: selectorFamily({
     key: "getTodosSelector",
-    // the get is the hardest part to grasp
+    // ! the get is the hardest part to grasp
     // * get is a function taking id as input param and returns an async function where the async operation will be performed
     // if same id is passed then no duplicate network calls will be there, the previous with the same id will be cached somewhere
     get: function (id) {

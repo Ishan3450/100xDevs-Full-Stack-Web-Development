@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import "./App.css";
+
 import { allNotificationsCount, jobsAtom, messagingAtom, networkAtom, notificationsAtom } from "./recoil/atoms";
 
 function App() {

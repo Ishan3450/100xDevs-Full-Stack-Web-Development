@@ -13,6 +13,7 @@ function App() {
 
 function Todo({ id }) {
   const todo = useRecoilValueLoadable(todosSelectorFamily(id));
+  
   // log below statement to know what lodable object returns and how it works
   // console.log(JSON.stringify(todo));
 
