@@ -1,0 +1,20 @@
+{
+  "name": "2-rate-limiter-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc -b && node dist/index.js && node dist/attackScript.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/express": "^5.0.0",
+    "axios": "^1.7.9",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0"
+  }
+}
